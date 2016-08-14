@@ -6,6 +6,7 @@
 package com.jasonpark.brain.java;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -14,7 +15,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.jasonpark.brain.java.model.Album;
 import com.jasonpark.brain.java.model.Artist;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
@@ -29,9 +29,13 @@ public class BrainJavaApplication {
     /**
      *
      * @param args User input.
-     * @exception IOException
+     * @exception JsonProcessingException
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws JsonProcessingException {
+        serializationExample();
+    }
+
+    private static void serializationExample() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
         mapper.registerModule(new JavaTimeModule());
@@ -50,5 +54,9 @@ public class BrainJavaApplication {
 //        mapper.writeValue(System.out, album);
         String albumJsonStr = mapper.writeValueAsString(album);
         System.out.println(albumJsonStr);
+    }
+
+    private static void serializationExampleUsingTreeModel() {
+
     }
 }
