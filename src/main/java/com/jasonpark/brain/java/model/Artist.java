@@ -24,6 +24,8 @@
 package com.jasonpark.brain.java.model;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -35,9 +37,18 @@ public class Artist {
 
     private final LocalDate birthDate;
 
-    public Artist(String name, LocalDate birthDate) {
+    private final Integer age;
+
+    private final String homeTown;
+
+    private final List<String> awardWon;
+
+    public Artist(String name, LocalDate birthDate, Integer age, String homeTown, List<String> awardWon) {
         this.name = name;
         this.birthDate = birthDate;
+        this.age = age;
+        this.homeTown = homeTown;
+        this.awardWon = awardWon;
     }
 
     public String getName() {
@@ -46,5 +57,63 @@ public class Artist {
 
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public String getHomeTown() {
+        return homeTown;
+    }
+
+    public List<String> getAwardWon() {
+        return awardWon;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.name);
+        hash = 79 * hash + Objects.hashCode(this.birthDate);
+        hash = 79 * hash + Objects.hashCode(this.age);
+        hash = 79 * hash + Objects.hashCode(this.homeTown);
+        hash = 79 * hash + Objects.hashCode(this.awardWon);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Artist other = (Artist) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.homeTown, other.homeTown)) {
+            return false;
+        }
+        if (!Objects.equals(this.birthDate, other.birthDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.age, other.age)) {
+            return false;
+        }
+        if (!Objects.equals(this.awardWon, other.awardWon)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Artist{" + "name=" + name + ", birthDate=" + birthDate + ", age=" + age + ", homeTown=" + homeTown + ", awardWon=" + awardWon + '}';
     }
 }
