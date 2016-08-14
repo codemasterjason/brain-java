@@ -13,6 +13,7 @@ import com.google.common.collect.ImmutableMap;
 import com.jasonpark.brain.java.model.Album;
 import com.jasonpark.brain.java.model.Artist;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -32,7 +33,8 @@ public class BrainJavaApplication {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
         mapper.registerModule(new JavaTimeModule());
-
+        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+        mapper.setPropertyNamingStrategy(new CustomPropertyNamingStrategy());
         Album album = new Album(
                 "Kind of Blue",
                 new String[]{"link1", "link2"},

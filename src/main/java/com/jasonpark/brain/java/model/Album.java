@@ -26,6 +26,7 @@ package com.jasonpark.brain.java.model;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  *
@@ -103,5 +104,51 @@ public class Album {
      */
     public Map<String, String> getMusicians() {
         return musicians;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.title);
+        hash = 67 * hash + Arrays.deepHashCode(this.links);
+        hash = 67 * hash + Objects.hashCode(this.songs);
+        hash = 67 * hash + Objects.hashCode(this.artist);
+        hash = 67 * hash + Objects.hashCode(this.musicians);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Album other = (Album) obj;
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        if (!Arrays.deepEquals(this.links, other.links)) {
+            return false;
+        }
+        if (!Objects.equals(this.songs, other.songs)) {
+            return false;
+        }
+        if (!Objects.equals(this.artist, other.artist)) {
+            return false;
+        }
+        if (!Objects.equals(this.musicians, other.musicians)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Album{" + "title=" + title + ", links=" + links + ", songs=" + songs + ", artist=" + artist + ", musicians=" + musicians + '}';
     }
 }
